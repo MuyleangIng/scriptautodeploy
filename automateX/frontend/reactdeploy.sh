@@ -2,7 +2,7 @@
 
 # Jenkins job details
 echo "Enter the Jenkins job to trigger: "
-jobName="frontend/deployreactv1.1.0"
+read jobName
 echo "Triggering the $jobName job"
 
 # Jenkins server authentication
