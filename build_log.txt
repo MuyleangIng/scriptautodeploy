@@ -1,0 +1,97 @@
+Started from command line by admin
+Loading library My-Jenkins-SharedLibrary@master
+Attempting to resolve master from remote references...
+ > git --version # timeout=10
+ > git --version # 'git version 2.39.2'
+ > git ls-remote -h -- https://github.com/MuyleangIng/My-Jenkins-SharedLibrary.git # timeout=10
+Found match: refs/heads/master revision d5276806b1d3b1434d4e8e7afb7300e6080897d5
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/jenkins_home/workspace/for-practice/testapp@libs/877c722651106f87b538466090ff5f7492031032901f99501b7faef5f89f67a7/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/MuyleangIng/My-Jenkins-SharedLibrary.git # timeout=10
+Fetching without tags
+Fetching upstream changes from https://github.com/MuyleangIng/My-Jenkins-SharedLibrary.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.39.2'
+ > git fetch --no-tags --force --progress -- https://github.com/MuyleangIng/My-Jenkins-SharedLibrary.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+Checking out Revision d5276806b1d3b1434d4e8e7afb7300e6080897d5 (master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f d5276806b1d3b1434d4e8e7afb7300e6080897d5 # timeout=10
+Commit message: "asas"
+ > git rev-list --no-walk d5276806b1d3b1434d4e8e7afb7300e6080897d5 # timeout=10
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/jenkins_home/workspace/for-practice/testapp
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Get Code from SCM)
+[Pipeline] echo
+TEST_CHOICE is production
+[Pipeline] script
+[Pipeline] {
+[Pipeline] echo
+Clone from master
+[Pipeline] git
+The recommended git tool is: NONE
+using credential password_for_gitlab
+ > git rev-parse --resolve-git-dir /var/jenkins_home/workspace/for-practice/testapp/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://gitlab.com/MuyleangIng1/reactjs # timeout=10
+Fetching upstream changes from https://gitlab.com/MuyleangIng1/reactjs
+ > git --version # timeout=10
+ > git --version # 'git version 2.39.2'
+using GIT_ASKPASS to set credentials 
+ > git fetch --tags --force --progress -- https://gitlab.com/MuyleangIng1/reactjs +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+Checking out Revision 490401446caec60238186824d2215b689d13bc57 (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 490401446caec60238186824d2215b689d13bc57 # timeout=10
+ > git branch -a -v --no-abbrev # timeout=10
+ > git branch -D master # timeout=10
+ > git checkout -b master 490401446caec60238186824d2215b689d13bc57 # timeout=10
+Commit message: "master"
+ > git rev-list --no-walk 490401446caec60238186824d2215b689d13bc57 # timeout=10
+[Pipeline] sh
++ curl -s -X POST https://api.telegram.org/bot6678469501:AAGO8syPMTxn0gQGksBPRchC-EoC6QRoS5o/sendMessage -d chat_id=1162994521 -d text=Pull succeeded!
+{"ok":true,"result":{"message_id":321,"from":{"id":6678469501,"is_bot":true,"first_name":"sen","username":"senodin_bot"},"chat":{"id":1162994521,"first_name":"Ing","last_name":"Muyleang","type":"private"},"date":1698396610,"text":"Pull succeeded!"}}
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build)
+[Pipeline] echo
+Building Images for deploying
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
++ docker rmi -f qwer:latest
+Error response from daemon: No such image: qwer:latest
++ docker rmi -f automatic/qwer:latest
+Error response from daemon: No such image: automatic/qwer:latest
+[Pipeline] sh
++ docker build -t qwer:latest -t automatic/qwer:latest .
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  1.092MB
+Step 1/9 : FROM node:18.12.1 as build
+ ---> 7b2a09676e2c
+Step 2/9 : workdir /app
+ ---> Using cache
+ ---> 5aaac63838a1
+Step 3/9 : copy ./ ./
+ ---> c68a783b893c
+Step 4/9 : run npm install --force
+ ---> Running in 8cc146b31efd
+[91mnpm[0m[91m WARN using --force Recommended protections disabled.
+[0m[91mnpm WARN deprecated w3c-hr-time@1.0.2: Use your platform's native performance.now() and performance.timeOrigin.
+[0m[91mnpm [0m[91mWARN deprecated stable@0.1.8: Modern JS already guarantees Array#sort() is a stable sort, so this library is deprecated. See the compatibility table on MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#browser_compatibility
+[0m[91mnpm WARN deprecated sourcemap-codec@1.4.8: Please use @jridgewell/sourcemap-codec instead
+[0m[91mnpm WARN deprecated rollup-plugin-terser@7.0.2: This package has been deprecated and is no longer maintained. Please use @rollup/plugin-terser
+[0m[91mnpm WARN deprecated workbox-cacheable-response@6.6.0: workbox-background-sync@6.6.0
