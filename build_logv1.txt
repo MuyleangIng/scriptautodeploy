@@ -1,0 +1,25 @@
+echo "Enter Container name or Container ID"
+read CONTAINER_NAME
+echo "Write full domain name"
+read dns
+echo "Enter the desired NGINX configuration file name (e.g., my_website):"
+read nginxConfigName
+# Retrieve the container port
+nginxConfigDir="/etc/nginx/sites-available"
+
+
+
+upstream backend {
+    server 167.172.81.247:3008;
+    server 159.223.87.30:3009;
+}
+server {
+    listen 80;
+    server_name testing.sen-pai.live;
+
+    location / {
+        proxy_pass http://backend;
+    }
+}
+
+

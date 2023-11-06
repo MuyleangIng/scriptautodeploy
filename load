@@ -1,0 +1,15 @@
+
+    server {
+        listen 80;
+        server_name testing.sen-pai.live;
+
+        location / {
+            proxy_pass http://backend;
+        }
+    }
+
+
+upstream backend {
+    server 167.172.81.247;
+    server 159.223.87.30;
+}
