@@ -35,28 +35,75 @@ else
     # Handle the case where the user enters an invalid input or any other necessary action.
 fi
 echo "------------------------"
-echo "Enter 'production=master', 'staging=main'for Choose Branch:"
-read -p "choose Branch master or main: " TEST_CHOICE
-# Prompt the user for environment variable values
+echo "Enter 'production=master', 'staging=main','development'for branch:"
+read -p "Enter 'production', 'staging': " TEST_CHOICE
+
+
 echo "------------------------"
 echo "Enter your registry name ex muyleangin or nexus registry"
-read -p "Enter your registry: " REGISTRY_DOCKER
+while true; do
+  read -p "Enter your registry: " REGISTRY_DOCKER
+  if [ -n "$REGISTRY_DOCKER" ] ; then
+    # Both inputs provided, exit the loop
+    break
+  else
+    echo " inputs are required. Please try again."
+  fi
+done
+echo "You entered Image Name: $REGISTRY_DOCKER"
+
 
 echo "------------------------"
 echo "Enter your image name ex: react or next ......"
-read -p "Enter your images name: " BUILD_CONTAINER_NAME
+while true; do
+  read -p "Enter your images name: " BUILD_CONTAINER_NAME
+  if [ -n "$BUILD_CONTAINER_NAME" ] ; then
+    # Both inputs provided, exit the loop
+    break
+  else
+    echo " inputs are required. Please try again."
+  fi
+done
+echo "You entered Image Name: $BUILD_CONTAINER_NAME"
 
 echo "------------------------"
 echo "Docker tag ex:  1.1 or latest=default"
-read -p "Enter docker_tag : " DOCKER_TAG
+while true; do
+  read -p "Enter docker_tag : " DOCKER_TAG
+  if [ -n "$DOCKER_TAG" ] ; then
+    # Both inputs provided, exit the loop
+    break
+  else
+    echo " inputs are required. Please try again."
+  fi
+done
+echo "You entered Image Name: $DOCKER_TAG"
 
 echo "------------------------"
 echo "Container Name for specific docker"
-read -p "Enter container_name: " CONTAINER_NAME
+while true; do
+  read -p "Enter container_name: " CONTAINER_NAME
+  if [ -n "$CONTAINER_NAME" ] ; then
+    # Both inputs provided, exit the loop
+    break
+  else
+    echo " inputs are required. Please try again."
+  fi
+done
+echo "You entered Image Name: $CONTAINER_NAME"
 
 echo "------------------------"
 echo "Enter REPO_URL:  ex: https://github.com/MuyleangIng/reactjs"
-read -p "Enter your url git : " REPO_URL
+while true; do
+  read -p "Enter your url git : " REPO_URL
+  if [ -n "$REPO_URL" ] ; then
+    # Both inputs provided, exit the loop
+    break
+  else
+    echo " inputs are required. Please try again."
+  fi
+done
+echo "You entered Image Name: $REPO_URL"
 
 
 # Trigger the Jenkins job with user-defined environment variables

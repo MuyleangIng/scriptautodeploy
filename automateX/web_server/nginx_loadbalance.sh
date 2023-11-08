@@ -1,5 +1,6 @@
 #!/bin/bash
-
+echo "----------name for upstream--------------"
+read -p "Enter your upsteam : " backend
 echo "----------Enter server1 & port1--------------"
 read -p "Enter server1: " server1
 read -p "Enter port1: " port1
@@ -28,7 +29,7 @@ fi
 
 # Generate the Nginx configuration
 nginxConfigContent="
-upstream backend {
+upstream $backend {
     server $server1:$port1;
     server $server2:$port2;
 }
@@ -37,7 +38,7 @@ server {
     server_name $dns;
 
     location / {
-        proxy_pass http://backend;
+        proxy_pass http://$backend;
     }
 }"
 

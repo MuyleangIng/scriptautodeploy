@@ -11,34 +11,99 @@ passwd="11456d3775f4cdcdae349da61e44fac187"
 url="http://188.166.191.62:8085/"
 
 # Prompt the user for parameter values
-echo "Enter 'true' or 'false' for BUILD_DOCKER:"
-read BUILD_DOCKER
-echo "------------------------"
-echo "Enter 'true' or 'false' for DOCKER_DEPLOY:"
-read DOCKER_DEPLOY
-echo "------------------------"
-echo "Enter 'production', 'staging','development'for TEST_CHOICE:"
-read TEST_CHOICE
+echo "Enter 'y' for 'true' or 'n' for 'false' for BUILD_DOCKER:"
+read -p "y or n: " input
 
-# Prompt the user for environment variable values
-echo "Enter REGISTRY_DOCKER:"
-read REGISTRY_DOCKER
+if [ "$input" = "y" ]; then
+    BUILD_DOCKER=true
+elif [ "$input" = "n" ]; then
+    BUILD_DOCKER=false
+else
+    echo "Invalid input. Please enter 'y' for 'true' or 'n' for 'false."
+    # Handle the case where the user enters an invalid input or any other necessary action.
+fi
 echo "------------------------"
-echo "Enter BUILD_CONTAINER_NAME:"
-read BUILD_CONTAINER_NAME
+echo "Enter 'y' for 'true' or 'n' for 'false' for DOCKER_DEPLOY:"
+read -p "y or n: " input
+
+if [ "$input" = "y" ]; then
+    DOCKER_DEPLOY=true
+elif [ "$input" = "n" ]; then
+    DOCKER_DEPLOY=false
+else
+    echo "Invalid input. Please enter 'y' for 'true' or 'n' for 'false."
+    # Handle the case where the user enters an invalid input or any other necessary action.
+fi
+echo "------------------------"
+echo "Enter 'production=master', 'staging=main','development'for branch:"
+read -p "Enter 'production', 'staging': " TEST_CHOICE
+
 
 echo "------------------------"
-echo "Enter DOCKER_TAG:"
-read DOCKER_TAG
+echo "Enter your registry name ex muyleangin or nexus registry"
+while true; do
+  read -p "Enter your registry: " REGISTRY_DOCKER
+  if [ -n "$REGISTRY_DOCKER" ] ; then
+    # Both inputs provided, exit the loop
+    break
+  else
+    echo " inputs are required. Please try again."
+  fi
+done
+echo "You entered Image Name: $REGISTRY_DOCKER"
+
 
 echo "------------------------"
-echo "Container Name:"
-read CONTAINER_NAME
+echo "Enter your image name ex: react or next ......"
+while true; do
+  read -p "Enter your images name: " BUILD_CONTAINER_NAME
+  if [ -n "$BUILD_CONTAINER_NAME" ] ; then
+    # Both inputs provided, exit the loop
+    break
+  else
+    echo " inputs are required. Please try again."
+  fi
+done
+echo "You entered Image Name: $BUILD_CONTAINER_NAME"
 
 echo "------------------------"
-echo "Enter REPO_URL:"
-read REPO_URL
+echo "Docker tag ex:  1.1 or latest=default"
+while true; do
+  read -p "Enter docker_tag : " DOCKER_TAG
+  if [ -n "$DOCKER_TAG" ] ; then
+    # Both inputs provided, exit the loop
+    break
+  else
+    echo " inputs are required. Please try again."
+  fi
+done
+echo "You entered Image Name: $DOCKER_TAG"
 
+echo "------------------------"
+echo "Container Name for specific docker"
+while true; do
+  read -p "Enter container_name: " CONTAINER_NAME
+  if [ -n "$CONTAINER_NAME" ] ; then
+    # Both inputs provided, exit the loop
+    break
+  else
+    echo " inputs are required. Please try again."
+  fi
+done
+echo "You entered Image Name: $CONTAINER_NAME"
+
+echo "------------------------"
+echo "Enter REPO_URL:  ex: https://github.com/MuyleangIng/reactjs"
+while true; do
+  read -p "Enter your url git : " REPO_URL
+  if [ -n "$REPO_URL" ] ; then
+    # Both inputs provided, exit the loop
+    break
+  else
+    echo " inputs are required. Please try again."
+  fi
+done
+echo "You entered Image Name: $REPO_URL"
 echo "------------------------"
 echo "Write full domain name"
 read dns
